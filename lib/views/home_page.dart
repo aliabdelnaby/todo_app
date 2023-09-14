@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/model/todo_model.dart';
 
 import '../constants/colors.dart';
+import '../widgets/custom_add_todo_item.dart';
+import '../widgets/custom_app_bar.dart';
 import '../widgets/todo_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,24 +31,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: kBGColor,
         elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Icon(
-              Icons.menu,
-              color: kBlack,
-              size: 30,
-            ),
-            SizedBox(
-              height: 40,
-              width: 40,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.asset('assets/avatar.jpeg'),
-              ),
-            ),
-          ],
-        ),
+        title: const CustomAppBar(),
       ),
       body: Stack(
         children: [
@@ -111,33 +96,7 @@ class _HomePageState extends State<HomePage> {
             alignment: Alignment.bottomCenter,
             child: Row(
               children: [
-                Expanded(
-                  child: Container(
-                    margin:
-                        const EdgeInsets.only(right: 20, left: 20, bottom: 20),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0, 0),
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextField(
-                      controller: _todoController,
-                      decoration: const InputDecoration(
-                        hintText: 'Add a new todo item',
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
+                CustomAddToDoItem(todoController: _todoController),
                 Container(
                   margin: const EdgeInsets.only(right: 20, bottom: 20),
                   child: ElevatedButton(
